@@ -20,5 +20,7 @@ func _on_area_3d_body_entered(body):
 	
 func collidedWithAreaOrBody(areaOrBody):	
 	if(!areaOrBody.is_in_group("Player") && !areaOrBody.is_in_group("Rocket")):
-		print("rocket deleting self because collided with something");
 		queue_free();
+		
+func _on_timer_timeout():
+	queue_free();

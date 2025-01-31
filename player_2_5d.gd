@@ -3,8 +3,7 @@ extends CharacterBody3D
 const SPEED = 5.0
 const JUMP_VELOCITY = 8
 
-@onready var rocketScene = preload("res://rocket.tscn");
-
+An
 func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():

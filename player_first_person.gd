@@ -10,6 +10,9 @@ var mouseLookUpDown = 0;
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	$"skeleton/AnimationPlayer".get_animation("Idle").loop_mode = Animation.LOOP_LINEAR;
+	$"skeleton/AnimationPlayer".get_animation("Walk").loop_mode = Animation.LOOP_LINEAR;
+	$"skeleton/AnimationPlayer".play("Idle");
 
 func _physics_process(delta):
 	var stickLook = Input.get_vector("lookleft","lookright","lookup","lookdown")*(-0.1);
@@ -28,11 +31,12 @@ func _physics_process(delta):
 	if dir:
 		velocity.x = move_toward(velocity.x, dir.x*SPEED, abs(dir.x*ACCEL*delta));
 		velocity.z = move_toward(velocity.z, dir.z*SPEED, abs(dir.z*ACCEL*delta));
+		$"skeleton/AnimationPlayer".play("Walk");
 	else:
 		var velDir = velocity.normalized();
 		velocity.x = move_toward(velocity.x, 0, abs(velDir.x*DECEL*delta));
 		velocity.z = move_toward(velocity.z, 0, abs(velDir.z*DECEL*delta));
-
+		$"skeleton/AnimationPlayer".play("Idle");
 	move_and_slide()
 	
 func _input(event):
@@ -43,3 +47,9 @@ func _input(event):
 		mouseLookUpDown = -event.relative.y * 0.01; # increase/decrease 0.01 to change sensitivity
 		if abs(mouseLookUpDown) < 0.02: # dead zone for mouse motion up/down
 			mouseLookUpDown = 0.0;
+
+func _on_area_3d_body_entered(body):
+	pass # not doing anything here yet...
+
+func _on_area_3d_area_entered(area):
+	pass # not doing anything here yet...

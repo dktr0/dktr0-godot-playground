@@ -1,10 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://8fgyxb2esrdh"]
+[gd_scene load_steps=6 format=3 uid="uid://8fgyxb2esrdh"]
 
 [ext_resource type="Script" path="res://player_first_person.gd" id="1_81geb"]
+[ext_resource type="PackedScene" uid="uid://cagi05ck207gl" path="res://skeleton.glb" id="2_ign5v"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_brf4u"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_qeh56"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p30qp"]
+size = Vector3(1.05, 1.05, 1.05)
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_81geb")
@@ -13,7 +17,19 @@ script = ExtResource("1_81geb")
 shape = SubResource("BoxShape3D_brf4u")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("BoxMesh_qeh56")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.990617, 0.136667, 0, -0.136667, 0.990617, 0, 1.08184, 0.938429)
+transform = Transform3D(1, 0, 0, 0, 0.990617, 0.136667, 0, -0.136667, 0.990617, 0, 1.08184, 1.49895)
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_p30qp")
+
+[node name="skeleton" parent="." instance=ExtResource("2_ign5v")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

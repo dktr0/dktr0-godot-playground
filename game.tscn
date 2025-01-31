@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bm0fq31n30wnh"]
+[gd_scene load_steps=22 format=3 uid="uid://bm0fq31n30wnh"]
 
 [ext_resource type="PackedScene" uid="uid://hac700oot0v3" path="res://box.tscn" id="3_4fidk"]
 [ext_resource type="PackedScene" uid="uid://cw5i07c5mp30v" path="res://overlay.tscn" id="3_uunbw"]
@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://1nq77wk18c46" path="res://weird-shape.glb" id="6_il1hv"]
 [ext_resource type="PackedScene" uid="uid://8fgyxb2esrdh" path="res://playerFirstPerson.tscn" id="6_riv0f"]
 [ext_resource type="Texture2D" uid="uid://o0mroq1g8gdi" path="res://skybox.exr" id="7_qvnh7"]
-[ext_resource type="PackedScene" uid="uid://bm8duqmsfyi55" path="res://follower.tscn" id="8_afel8"]
+[ext_resource type="PackedScene" uid="uid://bt2xrutu0s3j3" path="res://follower.tscn" id="8_afel8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gmoi7"]
 size = Vector3(400, 1, 400)
@@ -86,6 +86,44 @@ _data = {
 "teleport2": SubResource("Animation_4jfu0")
 }
 
+[sub_resource type="Animation" id="Animation_ag400"]
+resource_name = "new_animation"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(14, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_v5s1p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(14, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fcbci"]
+_data = {
+"RESET": SubResource("Animation_v5s1p"),
+"new_animation": SubResource("Animation_ag400")
+}
+
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_tdbvw"]
 panorama = ExtResource("7_qvnh7")
 
@@ -139,6 +177,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 1, 0)
 teleportTo = Vector3(-20, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Teleporter2"]
+libraries = {
+"": SubResource("AnimationLibrary_fcbci")
+}
+autoplay = "new_animation"
 
 [node name="weird-shape" parent="." instance=ExtResource("6_il1hv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)

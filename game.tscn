@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bm0fq31n30wnh"]
+[gd_scene load_steps=19 format=3 uid="uid://bm0fq31n30wnh"]
 
 [ext_resource type="PackedScene" uid="uid://hac700oot0v3" path="res://box.tscn" id="3_4fidk"]
 [ext_resource type="PackedScene" uid="uid://cw5i07c5mp30v" path="res://overlay.tscn" id="3_uunbw"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://1nq77wk18c46" path="res://weird-shape.glb" id="6_il1hv"]
 [ext_resource type="PackedScene" uid="uid://8fgyxb2esrdh" path="res://playerFirstPerson.tscn" id="6_riv0f"]
 [ext_resource type="Texture2D" uid="uid://o0mroq1g8gdi" path="res://skybox.exr" id="7_qvnh7"]
+[ext_resource type="PackedScene" uid="uid://bm8duqmsfyi55" path="res://follower.tscn" id="8_afel8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gmoi7"]
 size = Vector3(400, 1, 400)
@@ -147,3 +148,6 @@ transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 4, 2, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ny0bm")
+
+[node name="Follower" parent="." instance=ExtResource("8_afel8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.55679, 0.622557, 5.54562)

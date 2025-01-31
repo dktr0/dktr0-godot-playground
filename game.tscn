@@ -1,0 +1,149 @@
+[gd_scene load_steps=18 format=3 uid="uid://bm0fq31n30wnh"]
+
+[ext_resource type="PackedScene" uid="uid://hac700oot0v3" path="res://box.tscn" id="3_4fidk"]
+[ext_resource type="PackedScene" uid="uid://cw5i07c5mp30v" path="res://overlay.tscn" id="3_uunbw"]
+[ext_resource type="PackedScene" uid="uid://duhka8g603lwo" path="res://trampoline.tscn" id="4_pko4q"]
+[ext_resource type="PackedScene" uid="uid://dg2m2oboms32x" path="res://teleporter.tscn" id="5_34mee"]
+[ext_resource type="PackedScene" uid="uid://1nq77wk18c46" path="res://weird-shape.glb" id="6_il1hv"]
+[ext_resource type="PackedScene" uid="uid://8fgyxb2esrdh" path="res://playerFirstPerson.tscn" id="6_riv0f"]
+[ext_resource type="Texture2D" uid="uid://o0mroq1g8gdi" path="res://skybox.exr" id="7_qvnh7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gmoi7"]
+size = Vector3(400, 1, 400)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5aoj4"]
+size = Vector3(400, 1, 400)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_efaxr"]
+albedo_color = Color(0, 0.852204, 0.0786226, 1)
+
+[sub_resource type="Animation" id="Animation_rl6ey"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(14, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Teleporter:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(11, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_tbtbf"]
+resource_name = "new_animation"
+length = 6.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3, 6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(14, 1, 0), Vector3(14, 5, 0), Vector3(14, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_4jfu0"]
+resource_name = "teleport2"
+length = 12.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Teleporter:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(11, 1, 0), Vector3(11, 7, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i8yej"]
+_data = {
+"RESET": SubResource("Animation_rl6ey"),
+"new_animation": SubResource("Animation_tbtbf"),
+"teleport2": SubResource("Animation_4jfu0")
+}
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_tdbvw"]
+panorama = ExtResource("7_qvnh7")
+
+[sub_resource type="Sky" id="Sky_vir7a"]
+sky_material = SubResource("PanoramaSkyMaterial_tdbvw")
+
+[sub_resource type="Environment" id="Environment_ny0bm"]
+background_mode = 2
+sky = SubResource("Sky_vir7a")
+
+[node name="Game" type="Node3D"]
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_gmoi7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("BoxMesh_5aoj4")
+surface_material_override/0 = SubResource("StandardMaterial3D_efaxr")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 41.3645, 0)
+omni_range = 100.0
+omni_attenuation = 0.1
+
+[node name="Overlay" parent="." instance=ExtResource("3_uunbw")]
+
+[node name="Boxes" type="Node3D" parent="."]
+
+[node name="Box" parent="Boxes" instance=ExtResource("3_4fidk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="Trampoline" parent="Boxes" instance=ExtResource("4_pko4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0)
+
+[node name="Teleporter" parent="." instance=ExtResource("5_34mee")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 1, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Teleporter"]
+root_node = NodePath("../../Teleporter2")
+libraries = {
+"": SubResource("AnimationLibrary_i8yej")
+}
+autoplay = "new_animation"
+
+[node name="Teleporter2" parent="." instance=ExtResource("5_34mee")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 1, 0)
+teleportTo = Vector3(-20, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Teleporter2"]
+
+[node name="weird-shape" parent="." instance=ExtResource("6_il1hv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
+
+[node name="Player" parent="." instance=ExtResource("6_riv0f")]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 4, 2, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ny0bm")

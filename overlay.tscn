@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://cw5i07c5mp30v"]
+
+[ext_resource type="Script" path="res://overlay.gd" id="1_ad4xp"]
+[ext_resource type="FontFile" uid="uid://qt4pjktt6vdj" path="res://OperationNapalmItalic-1GgAv.ttf" id="2_6thrh"]
+
+[node name="Overlay" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ad4xp")
+
+[node name="Score" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -58.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_6thrh")
+theme_override_font_sizes/font_size = 50
+text = "0"

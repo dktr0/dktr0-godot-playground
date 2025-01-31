@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://dg2m2oboms32x"]
+
+[ext_resource type="Script" path="res://teleporter.gd" id="1_3gjvd"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4getu"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ibl5l"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b1kdh"]
+transparency = 1
+albedo_color = Color(0, 0.0166669, 1, 0.188235)
+
+[node name="Teleporter" type="Area3D"]
+script = ExtResource("1_3gjvd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_4getu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_ibl5l")
+surface_material_override/0 = SubResource("StandardMaterial3D_b1kdh")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

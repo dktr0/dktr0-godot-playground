@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://ctpe6y2xo76qi"]
+
+[ext_resource type="PackedScene" uid="uid://c05d41espmxud" path="res://separate-cubes.glb" id="1_0tskg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_abqfm"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3e6uw"]
+size = Vector3(2, 2.00296, 2)
+
+[node name="SeparateCubes" type="StaticBody3D"]
+
+[node name="separate-cubes" parent="." instance=ExtResource("1_0tskg")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_abqfm")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475089, 0.455612, -1.43573)
+shape = SubResource("BoxShape3D_3e6uw")

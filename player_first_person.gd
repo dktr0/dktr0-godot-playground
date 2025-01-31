@@ -11,8 +11,8 @@ func _ready():
 
 func _physics_process(delta):
 	var stickLook = Input.get_vector("lookleft","lookright","lookup","lookdown")*(-0.1);
-	rotate_y(mouseLookY + stickLook.y);
-	$Camera3D.rotate_x(mouseLookX + stickLook.x);
+	rotate_y(mouseLookY + stickLook.x);
+	$Camera3D.rotate_x(mouseLookX + stickLook.y);
 	$Camera3D.rotation.x = clampf($Camera3D.rotation.x, -deg_to_rad(70), deg_to_rad(70))
 
 	if not is_on_floor(): # gravity
@@ -33,7 +33,7 @@ func _physics_process(delta):
 	move_and_slide()
 	
 func _input(event):
-	if event is InputEventMouseMotion: # and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		mouseLookY = -event.relative.x * 0.01;
 		if abs(mouseLookY) < 0.02:
 			mouseLookY = 0.0;

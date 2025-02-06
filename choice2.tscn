@@ -1,0 +1,74 @@
+[gd_scene load_steps=2 format=3 uid="uid://cq1cyyf636kw6"]
+
+[ext_resource type="Script" path="res://choice_2.gd" id="1_4oj7l"]
+
+[node name="Choice2" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4oj7l")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.4
+anchor_right = 0.9
+anchor_bottom = 0.6
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.7
+offset_right = 40.0
+offset_bottom = 40.0
+text = "This is some awesome dialogue that I want the player to consider before pressing okay... This is some awesome dialogue that I want the player to consider before pressing okay... This is some awesome dialogue that I want the player to consider before pressing okay..."
+
+[node name="FirstButton" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.8
+anchor_right = 0.5
+anchor_bottom = 0.9
+offset_left = -384.0
+offset_top = -42.88
+offset_right = -95.0
+offset_bottom = -1.84001
+grow_horizontal = 2
+grow_vertical = 0
+focus_neighbor_right = NodePath("../SecondButton")
+focus_next = NodePath("../SecondButton")
+focus_previous = NodePath("../SecondButton")
+text = "Okay"
+
+[node name="SecondButton" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.617
+anchor_right = 0.5
+anchor_bottom = 0.9
+offset_left = 152.0
+offset_top = -15.8432
+offset_right = 404.0
+offset_bottom = -5.84001
+grow_horizontal = 2
+grow_vertical = 0
+focus_neighbor_left = NodePath("../FirstButton")
+focus_next = NodePath("../FirstButton")
+focus_previous = NodePath(".")
+text = "Okay"
+
+[connection signal="focus_entered" from="Panel/FirstButton" to="." method="_on_first_button_focus_entered"]
+[connection signal="pressed" from="Panel/FirstButton" to="." method="_on_first_button_pressed"]
+[connection signal="focus_entered" from="Panel/SecondButton" to="." method="_on_second_button_focus_entered"]
+[connection signal="pressed" from="Panel/SecondButton" to="." method="_on_second_button_pressed"]

@@ -5,9 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://duhka8g603lwo" path="res://trampoline.tscn" id="4_pko4q"]
 [ext_resource type="PackedScene" uid="uid://dg2m2oboms32x" path="res://teleporter.tscn" id="5_34mee"]
 [ext_resource type="PackedScene" uid="uid://1nq77wk18c46" path="res://weird-shape.glb" id="6_il1hv"]
-[ext_resource type="PackedScene" uid="uid://8fgyxb2esrdh" path="res://playerFirstPerson.tscn" id="6_riv0f"]
 [ext_resource type="Texture2D" uid="uid://o0mroq1g8gdi" path="res://skybox.exr" id="7_qvnh7"]
 [ext_resource type="PackedScene" uid="uid://bt2xrutu0s3j3" path="res://follower.tscn" id="8_afel8"]
+[ext_resource type="PackedScene" uid="uid://cqsrt2goiuj8h" path="res://player.tscn" id="8_e2aaa"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gmoi7"]
 size = Vector3(400, 1, 400)
@@ -86,10 +86,8 @@ _data = {
 "teleport2": SubResource("Animation_4jfu0")
 }
 
-[sub_resource type="Animation" id="Animation_ag400"]
-resource_name = "new_animation"
-length = 5.0
-loop_mode = 1
+[sub_resource type="Animation" id="Animation_v5s1p"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -103,8 +101,10 @@ tracks/0/keys = {
 "values": [Vector3(14, 1, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_v5s1p"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_ag400"]
+resource_name = "new_animation"
+length = 5.0
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -185,11 +185,14 @@ autoplay = "new_animation"
 [node name="weird-shape" parent="." instance=ExtResource("6_il1hv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
 
-[node name="Player" parent="." instance=ExtResource("6_riv0f")]
-transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 4, 2, 0)
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ny0bm")
 
 [node name="Follower" parent="." instance=ExtResource("8_afel8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.55679, 0.622557, 5.54562)
+
+[node name="Player" parent="." instance=ExtResource("8_e2aaa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2)

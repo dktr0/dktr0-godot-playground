@@ -17,7 +17,8 @@ func _ready():
 	popup("This is some awesome text that I want to share with the player.",Callable(self,"followup1"));
 	
 func followup1():
-	choice2("Now I am present a choice. Do you want to go left or go right?","Left","Right",Callable(self,"followup2"));
+	print("here's the followup");
+	choice2("Now I am presenting a choice. Do you want to go left or go right?","Left","Right",Callable(self,"followup2"));
 
 func followup2(n : int):
 	if n == 0:

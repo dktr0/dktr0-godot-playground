@@ -10,6 +10,7 @@
 albedo_color = Color(0.571788, 0.485106, 0.30258, 1)
 
 [node name="Box" type="StaticBody3D"]
+collision_priority = 0.0
 script = ExtResource("1_jr25r")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -20,5 +21,3 @@ mesh = SubResource("BoxMesh_1rruk")
 surface_material_override/0 = SubResource("StandardMaterial3D_l5vh5")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
-[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

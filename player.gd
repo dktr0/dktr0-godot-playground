@@ -27,9 +27,13 @@ func _physics_process(delta):
 
 	move_and_slide()
 	
-	if Input.is_action_just_pressed("fire"):
-		var r = rocketScene.instantiate();
-		$"..".add_child(r);
-		r.launch(self,8.0,1.0);
+	#if Input.is_action_just_pressed("fire"):
+		#var r = rocketScene.instantiate();
+		#$"..".add_child(r);
+		#r.launch(self,8.0,1.0);
 
 		
+
+
+func _on_box_clicked():
+	print("looks like the box was clicked")

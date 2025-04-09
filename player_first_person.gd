@@ -19,6 +19,8 @@ func _physics_process(delta):
 	rotate_y(mouseLookLeftRight + stickLook.x);
 	$Camera3D.rotate_x(mouseLookUpDown + stickLook.y);
 	$Camera3D.rotation.x = clampf($Camera3D.rotation.x, -deg_to_rad(70), deg_to_rad(70))
+	mouseLookLeftRight = 0;
+	mouseLookUpDown = 0;
 
 	if not is_on_floor(): # gravity
 		velocity += get_gravity() * delta
